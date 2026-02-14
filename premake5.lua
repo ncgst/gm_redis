@@ -31,9 +31,12 @@ CreateWorkspace({name = "redis.core", abi_compatible = false})
 		filter("system:windows")
 			links("ws2_32")
 		filter("system:linux")
+			disablewarnings({"unused-variable"})
+			targetextension(".so")
             links({ "pthread" })
             buildoptions({ "-pthread" })
             linkoptions({ "-pthread" })
+			defines("DEDICATED") -- All linux build focus Linux dedicated servers.
 		filter({})
 
 	group("dependencies")
