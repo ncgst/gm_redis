@@ -1,5 +1,6 @@
 #include "main.hpp"
 #include "redis_client.h"
+#include "redis_util.hpp"
 
 void redis::client::Initialize(GarrysMod::Lua::ILuaBase* LUA)
 {
@@ -130,6 +131,7 @@ void redis::client::HandleAction(GarrysMod::Lua::ILuaBase* LUA, clientAction act
 
 			if (LUA->PCall(2, 0, -4) != 0)
 				redis::ErrorNoHalt(LUA, "[redis Send callback error] ");
+			LUA->Pop();
 
 			LUA->ReferenceFree(action.data.reference);
 		}
@@ -472,7 +474,7 @@ int redis::client::lua_TTL(GarrysMod::Lua::ILuaBase* LUA)
 		ptr->m_iface.ttl(key, [ptr, callbackRef](cpp_redis::reply& reply)
 			{
 				ptr->EnqueueAction({ redis::globals::actionType::Reply, {reply, callbackRef} });
-			});	
+			});
 	}
 	catch (const cpp_redis::redis_error& e)
 	{
