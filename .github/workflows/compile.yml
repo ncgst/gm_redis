@@ -12,7 +12,7 @@ on:
 jobs:
   build_plugin_linux:
     name: "Build Plugin"
-    uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile.yml@workflow
+    uses: ncgst/gmod-common-module-base/.github/workflows/compile.yml@workflow
     with:
       PROJECT_NAME: "redis.core"
       BUILD_64x: "true"
