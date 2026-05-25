@@ -95,7 +95,13 @@ const char* toString(GarrysMod::Lua::ILuaBase* LUA, int32_t idx, size_t* len = n
 			break;
 		}
 
-	return LUA->GetString(-1, len);
+	unsigned int luaLen = 0;
+	const char* str = LUA->GetString(-1, len != nullptr ? &luaLen : nullptr);
+
+	if (len != nullptr)
+		*len = static_cast<size_t>(luaLen);
+
+	return str;
 }
 
 void redis::client::HandleAction(GarrysMod::Lua::ILuaBase* LUA, clientAction action)

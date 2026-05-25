@@ -1,6 +1,6 @@
 #pragma once
 
-#define MODULE_VERSION 1.3
+#define MODULE_VERSION 1.4
 
 #include <cpp_redis/cpp_redis>
 #include <GarrysMod/Lua/Interface.h>
