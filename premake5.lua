@@ -21,12 +21,15 @@ local TACOPIE_FOLDER = path.join(REDIS_FOLDER, "tacopie")
 
 CreateWorkspace({name = "redis.core", abi_compatible = false})
 	CreateProject({serverside = true})
+		filter({})
+
 		links({"cpp_redis", "tacopie"})
 		includedirs({
 			path.join(REDIS_FOLDER, "includes"),
 			path.join(TACOPIE_FOLDER, "includes"),
 		})
 		IncludeLuaShared()
+		filter({})
 
 		filter("system:windows")
 			links("ws2_32")
@@ -35,11 +38,13 @@ CreateWorkspace({name = "redis.core", abi_compatible = false})
             links({ "pthread" })
             buildoptions({ "-pthread" })
             linkoptions({ "-pthread" })
-			defines("DEDICATED") -- All linux build focus Linux dedicated servers.
+			defines("DEDICATED")
 		filter({})
 
 	group("dependencies")
 		project("cpp_redis")
+			filter({})
+
 			kind("StaticLib")
 			includedirs({
 				path.join(REDIS_FOLDER, "includes"),
@@ -62,6 +67,8 @@ CreateWorkspace({name = "redis.core", abi_compatible = false})
 			filter({})
 
 		project("tacopie")
+			filter({})
+
 			kind("StaticLib")
 			includedirs(path.join(TACOPIE_FOLDER, "includes"))
 			files({
