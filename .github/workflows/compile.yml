@@ -15,7 +15,7 @@ jobs:
     uses: RaphaelIT7/gmod-common-module-base/.github/workflows/compile.yml@workflow
     with:
       PROJECT_NAME: "redis.core"
-      BUILD_64x: "false"
+      BUILD_64x: true"
       REALM: "sv"
       BUILD_WINDOWS: "false"
       ARTIFACT_EXPIRE: "7"
